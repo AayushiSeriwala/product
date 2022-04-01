@@ -9,10 +9,9 @@ router.post('/signup',(request,response)=>{
     if(result){
       let payload={subject:result._id};
       let token=jwt.sign(payload,"hjhhkjhjkhdjk");
-
     }
     console.log(result);
-    return response.status(200).json(result,current_user=result,token=token);
+    return response.status(200).json({result:result,status:"success",token:token});
   })
   
   .catch(err=>{
