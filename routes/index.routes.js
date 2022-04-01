@@ -11,12 +11,12 @@ router.post('/signup',(request,response)=>{
       let token=jwt.sign(payload,"hjhhkjhjkhdjk");
     }
     console.log(result);
-    return response.status(200).json({result:result,status:"success",token:token});
+    return response.status(200).json({status:'logging success',current_user:result,token:token});
   })
   
   .catch(err=>{
     console.log(err);
-    return response.status(500).json({error:'Internal Server'});
+    return response.status(500).json({status:'loging failed'});
   })
 })
 router.post('/signin',(request,response)=>{
