@@ -8,9 +8,7 @@ router.post('/signup',(request,response)=>{
   User.create({username:request.body.username,email:request.body.email,password:request.body.password,mobile:request.body.mobile})
   .then(result=>{
     console.log(result);
-    return response.status(200).json(result);
-
-
+    return response.status(200).json(result);hr
   })
   
   .catch(err=>{
