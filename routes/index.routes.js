@@ -6,29 +6,32 @@ const router=express.Router();
 router.post('/signup',(request,response)=>{
   User.create({username:request.body.username,email:request.body.email,password:request.body.password,mobile:request.body.mobile})
   .then(result=>{
-    if(result){
-      let payload={subject:result._id};
-      let token=jwt.sign(payload,"hjhhkjhjkhdjk");
-    
     console.log(result);
-    return response.status(200).json({status:'logging success',current_user:result,token:token})
-    }
-  })
+    return response.status(200).json({status:'registeration success'});
+    })
+  
   
   .catch(err=>{
     console.log(err);
-    return response.status(500).json({status:'loging failed'});
+    return response.status(500).json({status:'registeration failed'});
   })
 })
 router.post('/signin',(request,response)=>{
   User.findOne({email:request.body.email,password:request.body.password})
   .then(result=>{
-  console.log(result);
   if(result){
-    return response.status(200).json({status:"login Success"});
-  }
+    
+      let payload={subject:result._id};
+      let token=jwt.sign(payload,"hjhhkjhjkhdjk");
+      
+      console.log(result)
+      return response.status(200).json({status:'logging success',current_user:result,token:token})
+    }
+  
+  
+
   else{
-    return response.status(201).json({status:"Login Failed"});
+    return response.status(201).json({status:'logging failed'});
   }
 })
   
@@ -49,9 +52,3 @@ router.post('/signin',(request,response)=>{
 
 
  module.exports=router;
-
-
-
-
-
-
