@@ -1,14 +1,18 @@
 const express=require('express');
 const User=require('../model/user.model.js');
-
-
-
+const jwt = require('jsonwebtoken');
+  
 const router=express.Router();
 router.post('/signup',(request,response)=>{
   User.create({username:request.body.username,email:request.body.email,password:request.body.password,mobile:request.body.mobile})
   .then(result=>{
+    if(result){
+      let payload={subject:result._id};
+      let token=jwt.sign(payload,"hjhhkjhjkhdjk");
+
+    }
     console.log(result);
-    return response.status(200).json(result);hr
+    return response.status(200).json(result,current_user=result,token=token);
   })
   
   .catch(err=>{
@@ -21,10 +25,10 @@ router.post('/signin',(request,response)=>{
   .then(result=>{
   console.log(result);
   if(result){
-    return response.status(200).json({msg:"login Success"});
+    return response.status(200).json({status:"login Success"});
   }
   else{
-    return response.status(201).json({msg:"Login Failed"});
+    return response.status(201).json({status:"Login Failed"});
   }
 })
   
