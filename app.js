@@ -12,9 +12,6 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use('/category',CategoryRouter);
 app.use('/',IndexRouter);
-
-
-
 app.listen(port,(result=>{
     console.log("Server is running");
 
